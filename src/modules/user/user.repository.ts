@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
-import { User } from './entities/user.entity';
-import { IUser, IUserAll } from 'src/shared/interfaces/user.interface';
 import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { IUser, IUserAll } from 'src/shared/interfaces/user.interface';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserRepository {
@@ -23,6 +23,7 @@ export class UserRepository {
 
     return retorno;
   }
+
   findOne(id: string): Promise<User> {
     return this.userModel.findById(id).exec();
   }
