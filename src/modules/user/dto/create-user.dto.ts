@@ -19,6 +19,6 @@ export class CreateUserDto implements IUser {
   password: string;
 
   @IsString({ message: 'O Role deve ser string' })
-  @IsOptional()
+  @IsNotEmpty({ message: 'O Role nao deve ser vazio' })
   role?: string;
 }

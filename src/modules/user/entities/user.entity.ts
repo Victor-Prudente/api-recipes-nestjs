@@ -30,6 +30,7 @@ export class User implements IUser {
   @Prop({ required: true })
   password: string;
 
+  @Prop({ required: true })
   role?: string;
 }
 
