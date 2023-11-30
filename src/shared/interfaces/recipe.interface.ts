@@ -3,7 +3,7 @@ export interface IRecipe {
   ingredients: string;
   prepareMode: string;
   urlImage?: string;
-  authorsIds: string[];
+  authorId: string;
 }
 
 export interface IRecipeAll {

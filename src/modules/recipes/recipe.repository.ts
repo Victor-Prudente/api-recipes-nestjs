@@ -17,7 +17,7 @@ export class RecipeRepository {
   async findAll(filter?: any): Promise<IRecipeAll> {
     const recipes: Recipe[] = await this.recipeModel
       .find(filter)
-      .populate('authors', 'name -_id')
+      .populate('author', 'name -_id')
       .exec();
     const count: number = await this.recipeModel.countDocuments(filter).exec();
 
@@ -30,10 +30,7 @@ export class RecipeRepository {
   }
 
   findOne(id: string): Promise<Recipe> {
-    return this.recipeModel
-      .findById(id)
-      .populate('authors', 'name -_id')
-      .exec();
+    return this.recipeModel.findById(id).populate('author', 'name -_id').exec();
   }
 
   findByName(name: string): Promise<Recipe> {
