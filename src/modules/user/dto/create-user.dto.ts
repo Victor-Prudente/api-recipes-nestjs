@@ -18,7 +18,5 @@ export class CreateUserDto implements IUser {
   @IsNotEmpty({ message: 'A senha não pode ser vazio' })
   password: string;
 
-  @IsString({ message: 'O Role deve ser string' })
-  @IsNotEmpty({ message: 'O Role nao deve ser vazio' })
   role?: string;
 }
