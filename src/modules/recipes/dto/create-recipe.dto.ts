@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { IRecipe } from 'src/shared/interfaces/recipe.interface';
 
 export class CreateRecipeDto implements IRecipe {
@@ -17,7 +17,7 @@ export class CreateRecipeDto implements IRecipe {
   @IsOptional()
   urlImage?: string;
 
-  @IsString({ message: 'O autor deve ser uma string' })
+  @IsArray({ message: 'O autor deve ser um array', each: false })
   @IsNotEmpty({ message: 'o autor não pode ser vazio' })
-  authorId: string;
+  authorsIds: string[];
 }

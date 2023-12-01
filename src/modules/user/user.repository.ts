@@ -39,6 +39,6 @@ export class UserRepository {
   }
 
   remove(id: string): Promise<User> {
-    return this.userModel.findByIdAndRemove(id).exec();
+    return this.userModel.findByIdAndDelete({ _id: id }).exec();
   }
 }

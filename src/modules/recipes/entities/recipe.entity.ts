@@ -28,21 +28,21 @@ export class Recipe implements IRecipe {
   @Prop({ required: true })
   prepareMode: string;
 
-  @Prop({ required: false })
+  @Prop({ required: true })
   urlImage?: string;
 
   @Prop({
     required: true,
     type: [{ type: MongooseSchema.Types.ObjectId, ref: 'User' }],
   })
-  authorId: string;
+  authorsIds: string[];
 }
 
 const RecipeSchema = SchemaFactory.createForClass(Recipe);
 
-RecipeSchema.virtual('author', {
+RecipeSchema.virtual('authors', {
   ref: 'User',
-  localField: 'authorId',
+  localField: 'authorsIds',
   foreignField: '_id',
   justOne: false,
 });
