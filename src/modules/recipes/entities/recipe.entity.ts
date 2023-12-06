@@ -28,7 +28,7 @@ export class Recipe implements IRecipe {
   @Prop({ required: true })
   prepareMode: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   urlImage?: string;
 
   @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'User' })

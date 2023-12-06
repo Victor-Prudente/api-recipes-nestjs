@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Recipe } from './entities/recipe.entity';
@@ -17,7 +17,7 @@ export class RecipeRepository {
   async findAll(filter?: any): Promise<IRecipeAll> {
     const recipes: Recipe[] = await this.recipeModel
       .find(filter)
-      .populate('authors', 'name -_id')
+      .populate('author', 'name -_id')
       .exec();
     const count: number = await this.recipeModel.countDocuments(filter).exec();
 
@@ -30,10 +30,7 @@ export class RecipeRepository {
   }
 
   findOne(id: string): Promise<Recipe> {
-    return this.recipeModel
-      .findById(id)
-      .populate('authors', 'name -_id')
-      .exec();
+    return this.recipeModel.findById(id).populate('author', 'name -_id').exec();
   }
 
   findByName(name: string): Promise<Recipe> {
@@ -44,6 +41,20 @@ export class RecipeRepository {
     return this.recipeModel
       .findByIdAndUpdate(id, updateRecipe, { new: true })
       .exec();
+  }
+
+  async updateImage(id: string, imageUrl: string): Promise<Recipe> {
+    const updatedRecipe = await this.recipeModel.findByIdAndUpdate(
+      id,
+      { $set: { imageUrl } },
+      { new: true },
+    );
+
+    if (!updatedRecipe) {
+      throw new NotFoundException('Receita não encontrada');
+    }
+
+    return updatedRecipe;
   }
 
   remove(id: string): Promise<Recipe> {

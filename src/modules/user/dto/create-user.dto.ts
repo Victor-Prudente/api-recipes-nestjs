@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { IUser } from 'src/shared/interfaces/user.interface';
 
 export class CreateUserDto implements IUser {
@@ -12,6 +12,7 @@ export class CreateUserDto implements IUser {
 
   @IsString({ message: 'O email deve ser uma string' })
   @IsNotEmpty({ message: 'O email não pode ser vazio' })
+  @IsEmail()
   email: string;
 
   @IsString({ message: 'A senha deve ser uma string' })

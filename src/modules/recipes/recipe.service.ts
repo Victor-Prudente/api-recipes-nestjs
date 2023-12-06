@@ -2,6 +2,7 @@ import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { Injectable } from '@nestjs/common';
 import { RecipeRepository } from './recipe.repository';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
+import { Recipe } from './entities/recipe.entity';
 
 @Injectable()
 export class RecipeService {
@@ -9,6 +10,10 @@ export class RecipeService {
 
   create(createRecipeDto: CreateRecipeDto) {
     return this.recipeRepository.create(createRecipeDto);
+  }
+
+  async updateImage(id: string, imageUrl: string): Promise<Recipe> {
+    return this.recipeRepository.updateImage(id, imageUrl);
   }
 
   findAll(filter?) {
