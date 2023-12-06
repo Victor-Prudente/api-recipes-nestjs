@@ -24,11 +24,13 @@ import { extname } from 'path';
 export class RecipeController {
   constructor(private readonly recipeService: RecipeService) {}
 
+  @UseGuards(AuthGuard)
   @Post()
   create(@Body() createRecipeDto: CreateRecipeDto) {
     return this.recipeService.create(createRecipeDto);
   }
 
+  @UseGuards(AuthGuard)
   @Post(':id/image')
   @UseInterceptors(
     FileInterceptor('image', {
