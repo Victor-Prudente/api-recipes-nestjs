@@ -18,7 +18,6 @@ import { FilterQuery } from 'mongoose';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { extname } from 'path';
 
 @Controller('recipes')
 export class RecipeController {
@@ -40,7 +39,7 @@ export class RecipeController {
           const id = req.params.id;
           const uniqueSuffix =
             Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const filename = `${id}-${uniqueSuffix}${extname(file.originalname)}`;
+          const filename = `${id}-${uniqueSuffix}.jpg`;
           callback(null, filename);
         },
       }),
@@ -51,6 +50,7 @@ export class RecipeController {
     @UploadedFile() image: Express.Multer.File,
   ) {
     const imageUrl = `/imagens/${image.filename}`;
+
     await this.recipeService.updateImage(id, imageUrl);
 
     return { message: 'Imagem enviada com sucesso!' };
