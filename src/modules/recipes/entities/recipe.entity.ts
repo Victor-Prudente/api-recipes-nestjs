@@ -29,7 +29,7 @@ export class Recipe implements IRecipe {
   prepareMode: string;
 
   @Prop({ required: false })
-  urlImage?: string;
+  imageUrl?: string;
 
   @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'User' })
   authorId: string;

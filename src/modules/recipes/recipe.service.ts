@@ -13,6 +13,7 @@ export class RecipeService {
   }
 
   async updateImage(id: string, imageUrl: string): Promise<Recipe> {
+    // Modificação: Chamar o método atualizado no repositório
     return this.recipeRepository.updateImage(id, imageUrl);
   }
 

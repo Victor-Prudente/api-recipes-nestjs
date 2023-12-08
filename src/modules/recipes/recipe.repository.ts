@@ -44,6 +44,7 @@ export class RecipeRepository {
   }
 
   async updateImage(id: string, imageUrl: string): Promise<Recipe> {
+    // Modificação: Atualizar a propriedade "imageUrl" no banco de dados
     const updatedRecipe = await this.recipeModel.findByIdAndUpdate(
       id,
       { $set: { imageUrl } },

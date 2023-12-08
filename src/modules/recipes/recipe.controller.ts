@@ -7,7 +7,6 @@ import {
   Patch,
   Post,
   Query,
-  UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -34,23 +33,19 @@ export class RecipeController {
   @UseInterceptors(
     FileInterceptor('image', {
       storage: diskStorage({
-        destination: './imagens', // Diretório onde os arquivos serão salvos
+        destination: './images',
         filename: (req, file, callback) => {
           const id = req.params.id;
-          const uniqueSuffix =
-            Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const filename = `${id}-${uniqueSuffix}.jpg`;
+          const filename = `${id}.jpeg`; // Modificação: Nome do arquivo com o ID da receita
           callback(null, filename);
         },
       }),
     }),
   )
-  async uploadImage(
-    @Param('id') id: string,
-    @UploadedFile() image: Express.Multer.File,
-  ) {
-    const imageUrl = `/imagens/${image.filename}`;
+  async uploadImage(@Param('id') id: string) {
+    const imageUrl = `${id}.jpeg`;
 
+    // Salvar informações no banco de dados usando a variável 'image'
     await this.recipeService.updateImage(id, imageUrl);
 
     return { message: 'Imagem enviada com sucesso!' };
