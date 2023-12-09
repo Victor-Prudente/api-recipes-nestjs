@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
       });
 
       // Verificar se a role é 'admin'
-      if (payload.role !== 'admin') {
+      if (payload.role !== 'admin' && payload.role !== 'user') {
         throw new UnauthorizedException(
           'Acesso não autorizado para administradores',
         );
