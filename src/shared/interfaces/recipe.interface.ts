@@ -2,7 +2,7 @@ export interface IRecipe {
   name: string;
   ingredients: string;
   prepareMode: string;
-  urlImage?: string;
+  imageUrl?: string;
   authorId: string;
 }
 

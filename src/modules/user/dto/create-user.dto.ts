@@ -1,4 +1,10 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsIn,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { IUser } from 'src/shared/interfaces/user.interface';
 
 export class CreateUserDto implements IUser {
@@ -19,5 +25,8 @@ export class CreateUserDto implements IUser {
   @IsNotEmpty({ message: 'A senha não pode ser vazio' })
   password: string;
 
-  role?: string;
+  @IsOptional()
+  @IsString({ message: 'O role deve ser uma string' })
+  @IsIn(['user', 'admin'], { message: 'O role deve ser "user" ou "admin"' })
+  role?: 'user' | 'admin';
 }

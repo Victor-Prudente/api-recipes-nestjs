@@ -15,7 +15,7 @@ export class CreateRecipeDto implements IRecipe {
   prepareMode: string;
 
   @IsOptional()
-  urlImage?: string;
+  imageUrl?: string;
 
   @IsNotEmpty({ message: 'o autor não pode ser vazio' })
   @IsString({ message: 'O author deve ser uma string' })

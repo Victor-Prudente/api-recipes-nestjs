@@ -25,10 +25,19 @@ export class AuthGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
       });
+
+      // Verificar se a role é 'admin'
+      if (payload.role !== 'admin' && payload.role !== 'user') {
+        throw new UnauthorizedException(
+          'Acesso não autorizado para administradores',
+        );
+      }
+
       request['user'] = payload;
     } catch {
       throw new UnauthorizedException();
     }
+
     return true;
   }
 

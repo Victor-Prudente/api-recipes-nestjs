@@ -31,7 +31,7 @@ export class User implements IUser {
   password: string;
 
   @Prop({ required: false })
-  role?: string;
+  role?: 'user' | 'admin';
 }
 
 const UserSchema = SchemaFactory.createForClass(User);

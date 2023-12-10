@@ -17,6 +17,15 @@ export class UserService {
     return this.userRepository.create(createUserDto);
   }
 
+  async createAdmin(createAdminDto: CreateUserDto): Promise<User> {
+    const saltOrRounds = 10;
+    const password = createAdminDto.password;
+    const hash: string = await bcrypt.hash(password, saltOrRounds);
+    createAdminDto.password = hash;
+
+    return this.userRepository.create(createAdminDto);
+  }
+
   findAll() {
     return this.userRepository.findAll();
   }
